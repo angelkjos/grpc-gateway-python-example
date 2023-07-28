@@ -1,0 +1,3 @@
+grpcio-tools
+protobuf==3.20.*
+grpc-gateway-protoc-gen-openapiv2

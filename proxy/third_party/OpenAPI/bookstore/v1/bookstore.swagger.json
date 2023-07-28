@@ -1,0 +1,401 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "bookstore.proto",
+    "version": "1.0"
+  },
+  "tags": [
+    {
+      "name": "Bookstore"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/shelves": {
+      "get": {
+        "summary": "List of shelves",
+        "description": "Gets a list of shelves in the bookstore.",
+        "operationId": "Bookstore_ListShelves",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bookstoreListShelvesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Shelves"
+        ]
+      },
+      "post": {
+        "summary": "Create a shelf",
+        "description": "Add a shelf to the server.",
+        "operationId": "Bookstore_CreateShelf",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bookstoreShelf"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "shelf",
+            "description": "The shelf resource to create.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bookstoreShelf"
+            }
+          }
+        ],
+        "tags": [
+          "Shelves"
+        ]
+      }
+    },
+    "/api/v1/shelves/{shelf}": {
+      "get": {
+        "summary": "Get a shelf",
+        "description": "Gets a shelf the server by id.",
+        "operationId": "Bookstore_GetShelf",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bookstoreShelf"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "shelf",
+            "description": "The ID of the shelf resource to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Shelves"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a shelf",
+        "description": "Delete a shelf from the server.",
+        "operationId": "Bookstore_DeleteShelf",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "shelf",
+            "description": "The ID of the shelf to delete.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Shelves"
+        ]
+      }
+    },
+    "/api/v1/shelves/{shelf}/books": {
+      "get": {
+        "summary": "List books",
+        "description": "Gets all books belonging to a shelf by id.",
+        "operationId": "Bookstore_ListBooks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bookstoreListBooksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "shelf",
+            "description": "ID of the shelf which books to list.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Books"
+        ]
+      },
+      "post": {
+        "summary": "Create book",
+        "description": "Creates a book on a shelf.",
+        "operationId": "Bookstore_CreateBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bookstoreBook"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "shelf",
+            "description": "The ID of the shelf on which to create a book.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "book",
+            "description": "A book resource to create on the shelf.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bookstoreBook"
+            }
+          }
+        ],
+        "tags": [
+          "Books"
+        ]
+      }
+    },
+    "/api/v1/shelves/{shelf}/books/{book}": {
+      "get": {
+        "summary": "Get book",
+        "description": "Gets a book from a shelf by id.",
+        "operationId": "Bookstore_GetBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/bookstoreBook"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "shelf",
+            "description": "The ID of the shelf from which to retrieve a book.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "book",
+            "description": "The ID of the book to retrieve.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Books"
+        ]
+      },
+      "delete": {
+        "summary": "Delete book",
+        "description": "Deletes a book on a shelf.",
+        "operationId": "Bookstore_DeleteBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "shelf",
+            "description": "The ID of the shelf from which to delete a book.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "book",
+            "description": "The ID of the book to delete.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Books"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "bookstoreBook": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "description": "A unique book id."
+        },
+        "author": {
+          "type": "string",
+          "description": "An author of the book."
+        },
+        "title": {
+          "type": "string",
+          "description": "A book title."
+        }
+      },
+      "description": "A book resource."
+    },
+    "bookstoreListBooksResponse": {
+      "type": "object",
+      "properties": {
+        "books": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/bookstoreBook"
+          },
+          "description": "The books on the shelf."
+        }
+      },
+      "description": "Response message to ListBooks method."
+    },
+    "bookstoreListShelvesResponse": {
+      "type": "object",
+      "properties": {
+        "shelves": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/bookstoreShelf"
+          },
+          "description": "Shelves in the bookstore."
+        }
+      },
+      "description": "Response to ListShelves call."
+    },
+    "bookstoreShelf": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "description": "A unique shelf id."
+        },
+        "theme": {
+          "type": "string",
+          "description": "A theme of the shelf (fiction, poetry, etc)."
+        }
+      },
+      "description": "A shelf resource."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "gRPC-gateway example with python server",
+    "url": "https://github.com/angelkjos/grpc-gateway-python-example"
+  }
+}
